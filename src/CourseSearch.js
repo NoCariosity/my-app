@@ -1,11 +1,10 @@
 import React from 'react';
-import './CourseSearch.scss';
 
 class CourseSearch extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            searchValue: 'Search'
+            searchValue: ''
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -23,9 +22,10 @@ class CourseSearch extends React.Component {
                     className="search-bar border shadow-sm p-3 mb-5 rounded"
                     value={this.state.searchValue}
                     onChange={this.handleChange}    // need to be lifted up to CourseCatalogue
+                    placeholder="Search"
                 >
                 </input>
-                <label className="search-icon"></label>
+                {/* <label className="search-icon"></label> */}
             </div>
         );
     }
