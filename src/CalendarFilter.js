@@ -9,7 +9,8 @@ class CalendarFilter extends React.Component {
             <div className="calendar-filter">
                 <div className="calendar d-flex justify-content-between align-middle">
                     <label>{this.props.label}</label>
-                    <DatePicker 
+                    <DatePicker
+                        dateFormat="dd/MM/yyyy"
                         selected={this.props.date}
                         onChange={(date) => this.props.handleChange({[this.props.label]: date})}
                     />

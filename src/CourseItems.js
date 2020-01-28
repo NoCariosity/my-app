@@ -2,41 +2,47 @@ import React from 'react';
 
 function CourseItems(props) {
     return (
-        <div className="col-9">
-            {props.courses.map((course) => (
-            <div className="course-card">
-                <div className="row">
-                    <img className="course-avatar col-2" alt={course.title}>
-                    </img>
-                    <div className="col-10">
-                        <div className="course-category">
-                            {course.Category}
+        <div>
+            {props.courses ? props.courses.map((course) => (
+            <div className="course-card" key={course.TemplateID}>
+                <img className="course-avatar" alt={course.Name} src={require("./images/HSR.jpg")}>
+                </img>
+                <div className="course-description">
+                    <div className="course-category">
+                        {course.Categories ? course.Categories.map((category) => (
+                            <label>
+                                {category.Name}
+                            </label>
+                        )) : ''}
+                    </div>
+                    <div className="course-title">
+                        {course.Name}
+                    </div>
+                    <div className="course-overview">
+                        {course.Description.Summary}
+                    </div>
+                    <div className="course-card-bottom">
+                        <div className="course-tags">
+                            {course.Tags ? course.Tags.map((tag) => (
+                                <label>
+                                    {tag}
+                                </label>
+                            )): ''}
                         </div>
-                        <div className="course-title">
-                            {course.Title}
-                        </div>
-                        <div className="course-overview">
-                            {course.Summary}
-                        </div>
-                        <div className="course-card-bottom row">
-                            <div className="tags col-8 d-flex">
-                                {course.Tags.map((tag) => (
-                                    <label className="course-tag">
-                                        {tag}
-                                    </label>
-                                ))}
-                            </div>
-                            <div className="col-4">
-                                <button type="link" className="learn-more-button" href={course.Uri}>
-                                    Learn More
+                        <div className="course-button">
+                            <a href={course.ViewUri}>
+                                <button className="learn-more-button">
+                                Learn More
                                 </button>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             )
-        )}
+        ) : (<div className="no-results">
+            No results
+        </div>)}
         </div>
     );
 }

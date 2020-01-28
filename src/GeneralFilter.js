@@ -9,6 +9,7 @@ class GeneralFilter extends React.Component{
                     defaultValue={this.props.options[0]}
                     name="general"
                     options={this.props.options}
+                    onChange={this.props.handleClick}
                 />
             </div>
         );
