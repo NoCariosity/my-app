@@ -34,7 +34,7 @@ export const getCourses = (courseCodes) => {
     ).then(res => res.json());
   }else {
     // TODO
-    // courseCodes.length = 20;
+    // courseCodes.length >= 32;
     // return fetch(
     //   `${eventTemplateSearch}&filter=templateid=[${courseCodes}]&fields=TemplateID,Code,Name,Description,Categories,Tags,ViewUri&top=20`
     // ).then(res => res.json());

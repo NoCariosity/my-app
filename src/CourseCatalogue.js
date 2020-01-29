@@ -114,32 +114,36 @@ class CourseCatalogue extends React.Component {
     
     async handleFilters(filters, categories){
         let courseFacets = await DataAPI.getCourseIDs(filters).then(data => data.Facets[0].Values);
-        let codes = [];
+        let codes = [], courses = [];
         for(let course of courseFacets){
             codes.push(course.Code);
         }
-        let courses = await DataAPI.getCourses(codes);
+        if(codes.length > 0){
+            const data = await DataAPI.getCourses(codes);
+            courses = data.Items;
+        }
         if(categories){
             this.setState({
                 categories,
                 filters,
-                currentCourses: courses.Items,
-                allCourses: courses.Items
+                currentCourses: courses,
+                allCourses: courses,
+            });
+        }else{
+            this.setState({
+                filters,
+                currentCourses: courses,
+                allCourses: courses,
             });
         }
-        this.setState({
-            filters,
-            currentCourses: courses.Items,
-            allCourses: courses.Items
-        });
     }
 
     handleSearch(event) {
         if(event.target.value === ''){
-            this.setState((preState) => {
+            this.setState((prevState) => {
                 return {
                     searchValue: '',
-                    currentCourses: preState.allCourses
+                    currentCourses: prevState.allCourses
                 }
             });
         } else {
@@ -167,8 +171,7 @@ class CourseCatalogue extends React.Component {
     }
 
     render() {
-        console.log(this.state.currentCourses);
-        return (
+        return(
             <div className='impac-course-catelogue'>
                 <CategoryItems categories={this.state.categories} handleClick={this.handleCategoryItemClick}/>
                 <CourseSearch searchValue={this.state.searchValue} handleChange={this.handleSearch} />
